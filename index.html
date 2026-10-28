@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muh Riyad Azzikra Dz — Portofolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #05070d;
+    --bg2: #0b1120;
+    --card: rgba(21,28,44,.55);
+    --border: rgba(255,255,255,.08);
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --accent3: #ff2d92;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    position:relative;
+    min-height:100vh;
+  }
+
+  /* ===== PARTICLE BACKGROUND ===== */
+  #particles{position:fixed;inset:0;z-index:-2;pointer-events:none;}
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0,229,255,.10), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(124,58,237,.12), transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(255,45,146,.05), transparent 50%);
+  }
+
+  /* ===== CURSOR GLOW ===== */
+  .cursor-glow{
+    position:fixed;width:400px;height:400px;border-radius:50%;
+    background:radial-gradient(circle, rgba(0,229,255,.15), transparent 60%);
+    pointer-events:none;z-index:1;
+    transform:translate(-50%,-50%);
+    transition:transform .1s ease-out;
+    filter:blur(30px);
+  }
+
+  /* ===== SCROLL PROGRESS ===== */
+  .scroll-bar{
+    position:fixed;top:0;left:0;height:3px;width:0%;
+    background:linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    z-index:200;
+    box-shadow:0 0 10px rgba(0,229,255,.7);
+    transition:width .1s linear;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav{
+    position:fixed;top:0;left:0;width:100%;
+    padding:18px 8%;
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(5,7,13,.6);
+    backdrop-filter:blur(16px) saturate(180%);
+    -webkit-backdrop-filter:blur(16px) saturate(180%);
+    border-bottom:1px solid var(--border);
+    z-index:100;
+  }
+  nav .logo{
+    font-weight:900;font-size:1.4rem;letter-spacing:-.5px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+    background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:gradientShift 4s linear infinite;
+  }
+  @keyframes gradientShift{to{background-position:200% center;}}
+  nav ul{display:flex;gap:32px;list-style:none;}
+  nav ul a{
+    color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500;
+    transition:.3s;position:relative;padding:4px 0;
+  }
+  nav ul a::after{
+    content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    transition:width .3s;
+  }
+  nav ul a:hover{color:var(--accent);}
+  nav ul a:hover::after{width:100%;}
+  .menu-btn{display:none;font-size:1.6rem;cursor:pointer;color:var(--accent);}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:130px 8% 60px;
+    position:relative;
+  }
+  .hero-wrap{
+    display:flex;align-items:center;gap:80px;flex-wrap:wrap;
+    justify-content:center;position:relative;z-index:2;
+    max-width:1200px;width:100%;
+  }
+  .hero-text{max-width:600px;}
+  .hero-text .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 18px;border-radius:50px;
+    background:rgba(0,229,255,.08);
+    border:1px solid rgba(0,229,255,.3);
+    color:var(--accent);font-size:.8rem;font-weight:600;
+    margin-bottom:22px;
+    backdrop-filter:blur(10px);
+  }
+  .badge .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 10px var(--accent);
+    animation:pulse 1.5s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:.5;transform:scale(1.3);}
+  }
+  .hero-text h1{
+    font-size:3.4rem;font-weight:900;line-height:1.1;margin-bottom:18px;
+    letter-spacing:-1.5px;
+  }
+  .hero-text h1 span{
+    background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+    background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:gradientShift 4s linear infinite;
+  }
+  .hero-text .typing{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--accent);font-size:1rem;font-weight:500;
+    margin-bottom:16px;min-height:24px;
+    display:inline-block;
+  }
+  .typing::after{
+    content:'|';color:var(--accent3);
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .hero-text p{color:var(--muted);line-height:1.8;margin-bottom:30px;}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    padding:14px 30px;border-radius:50px;font-weight:600;font-size:.9rem;
+    text-decoration:none;transition:.35s;display:inline-flex;align-items:center;gap:8px;
+    cursor:pointer;border:none;font-family:inherit;
+    position:relative;overflow:hidden;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;
+    box-shadow:0 8px 30px rgba(0,229,255,.35);
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(0,229,255,.5);
+  }
+  .btn-primary::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,var(--accent2),var(--accent3));
+    opacity:0;transition:opacity .35s;z-index:-1;
+  }
+  .btn-primary:hover::before{opacity:1;}
+  .btn-outline{
+    border:1.5px solid rgba(255,255,255,.15);color:var(--text);
+    background:rgba(255,255,255,.02);
+    backdrop-filter:blur(10px);
+  }
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);}
+  .btn-cv{
+    background:linear-gradient(135deg,#ff2d92,#7c3aed);
+    color:#fff;
+    box-shadow:0 8px 30px rgba(255,45,146,.35);
+  }
+  .btn-cv:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(255,45,146,.5);
+  }
+
+  /* Avatar */
+  .avatar-wrap{
+    position:relative;
+    width:300px;height:300px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .avatar-ring{
+    position:absolute;inset:0;border-radius:50%;
+    background:conic-gradient(from 0deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
+    animation:spin 6s linear infinite;
+    filter:blur(4px);
+  }
+  .avatar-ring::after{
+    content:'';position:absolute;inset:6px;border-radius:50%;
+    background:var(--bg);
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .avatar{
+    position:relative;z-index:2;
+    width:270px;height:270px;border-radius:50%;
+    background:linear-gradient(135deg,#0b1120,#1e293b);
+    display:flex;align-items:center;justify-content:center;
+    font-size:7rem;font-weight:900;
+    background-clip:padding-box;
+    box-shadow:inset 0 0 60px rgba(0,229,255,.2);
+    color:var(--accent);
+    animation:float 5s ease-in-out infinite;
+    overflow:hidden;
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+
+  /* ===== SECTION ===== */
+  section{padding:110px 8%;position:relative;}
+  .section-title{text-align:center;margin-bottom:70px;}
+  .section-title .tag{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--accent);font-size:.85rem;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;
+  }
+  .section-title h2{font-size:2.6rem;font-weight:900;letter-spacing:-1px;}
+  .section-title h2 span{
+    background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+    background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:gradientShift 4s linear infinite;
+  }
+  .section-title .line{
+    width:80px;height:4px;margin:16px auto 0;border-radius:4px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+    box-shadow:0 0 15px rgba(0,229,255,.6);
+  }
+
+  /* ===== ABOUT ===== */
+  .about-wrap{
+    display:flex;gap:50px;flex-wrap:wrap;justify-content:center;align-items:center;
+    max-width:1100px;margin:0 auto;
+  }
+  .about-text{
+    flex:1;min-width:300px;max-width:680px;
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .about-text::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);
+  }
+  .about-text p{color:var(--muted);line-height:1.9;margin-bottom:18px;}
+  .about-text b{color:var(--accent);}
+  .about-info{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;}
+  .info-chip{
+    padding:10px 18px;border-radius:50px;
+    background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);
+    font-size:.82rem;color:var(--text);
+    transition:.3s;
+  }
+  .info-chip:hover{
+    background:rgba(0,229,255,.15);
+    transform:translateY(-2px);
+    border-color:var(--accent);
+  }
+  .info-chip b{color:var(--accent);}
+
+  /* ===== SKILLS ===== */
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;max-width:1200px;margin:0 auto;
+  }
+  .skill-card{
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:20px;padding:30px 26px;
+    transition:.4s cubic-bezier(.2,.8,.2,1);
+    position:relative;overflow:hidden;
+  }
+  .skill-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(0,229,255,.08),transparent);
+    opacity:0;transition:.4s;
+  }
+  .skill-card:hover{
+    transform:translateY(-10px) scale(1.02);
+    border-color:rgba(0,229,255,.5);
+    box-shadow:0 20px 50px rgba(0,0,0,.5), 0 0 30px rgba(0,229,255,.15);
+  }
+  .skill-card:hover::before{opacity:1;}
+  .skill-card .icon{
+    font-size:2.4rem;margin-bottom:16px;
+    display:inline-flex;align-items:center;justify-content:center;
+    width:56px;height:56px;border-radius:14px;
+    background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(124,58,237,.15));
+    border:1px solid rgba(0,229,255,.25);
+  }
+  .skill-card h3{font-size:1.05rem;margin-bottom:8px;font-weight:700;}
+  .skill-card p{color:var(--muted);font-size:.83rem;line-height:1.7;margin-bottom:16px;}
+  .skill-bar{
+    height:6px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;
+  }
+  .skill-bar span{
+    display:block;height:100%;width:0;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    border-radius:6px;
+    transition:width 1.5s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 0 10px rgba(0,229,255,.6);
+  }
+
+  /* ===== CERTIFICATES ===== */
+  .cert-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:26px;max-width:1200px;margin:0 auto;
+  }
+  .cert-card{
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:20px;overflow:hidden;
+    transition:.4s cubic-bezier(.2,.8,.2,1);cursor:pointer;
+    position:relative;
+  }
+  .cert-card::after{
+    content:'🔍 Lihat';position:absolute;top:14px;right:14px;
+    background:rgba(0,0,0,.6);color:var(--accent);
+    padding:6px 12px;border-radius:50px;font-size:.75rem;font-weight:600;
+    opacity:0;transition:.3s;backdrop-filter:blur(10px);
+  }
+  .cert-card:hover::after{opacity:1;}
+  .cert-card:hover{
+    transform:translateY(-10px);
+    border-color:rgba(0,229,255,.5);
+    box-shadow:0 25px 60px rgba(0,0,0,.6), 0 0 40px rgba(0,229,255,.2);
+  }
+  .cert-img{
+    width:100%;height:200px;
+    background:linear-gradient(135deg,#1e293b,#0f172a);
+    display:flex;align-items:center;justify-content:center;
+    font-size:3.5rem;overflow:hidden;position:relative;
+  }
+  .cert-img img{width:100%;height:100%;object-fit:cover;transition:.4s;}
+  .cert-card:hover .cert-img img{transform:scale(1.08);}
+  .cert-body{padding:22px 24px;}
+  .cert-body h3{font-size:1rem;margin-bottom:6px;font-weight:700;}
+  .cert-body .issuer{
+    color:var(--accent);font-size:.8rem;font-weight:600;margin-bottom:8px;
+    display:flex;align-items:center;gap:6px;
+  }
+  .cert-body .year{color:var(--muted);font-size:.78rem;font-family:'JetBrains Mono',monospace;}
+
+  /* ===== CV SECTION ===== */
+  #cv{background:linear-gradient(135deg, rgba(124,58,237,.05), rgba(0,229,255,.05));}
+  .cv-wrap{
+    max-width:900px;margin:0 auto;
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:50px 40px;
+    text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .cv-wrap::before{
+    content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+    background:conic-gradient(from 0deg, transparent, rgba(0,229,255,.1), transparent, rgba(124,58,237,.1), transparent);
+    animation:spin 15s linear infinite;z-index:-1;
+  }
+  .cv-wrap h3{font-size:1.6rem;font-weight:800;margin-bottom:14px;}
+  .cv-wrap p{color:var(--muted);margin-bottom:32px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;}
+  .cv-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .cv-btns .btn{padding:15px 34px;font-size:.95rem;}
+  .cv-note{
+    margin-top:24px;font-size:.78rem;color:var(--muted);
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:24px;max-width:1100px;margin:0 auto;
+  }
+  .contact-card{
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:20px;padding:32px 24px;text-align:center;
+    text-decoration:none;color:var(--text);transition:.4s cubic-bezier(.2,.8,.2,1);
+    position:relative;overflow:hidden;
+  }
+  .contact-card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 25px 60px rgba(0,0,0,.5);
+  }
+  .contact-card.wa:hover{border-color:#25d366;box-shadow:0 25px 60px rgba(37,211,102,.25);}
+  .contact-card.ig:hover{border-color:#dc2743;box-shadow:0 25px 60px rgba(220,39,67,.25);}
+  .contact-card.tt:hover{border-color:#25f4ee;box-shadow:0 25px 60px rgba(37,244,238,.25);}
+  .contact-card.gm:hover{border-color:#ea4335;box-shadow:0 25px 60px rgba(234,67,53,.25);}
+  .contact-card .icon{
+    width:64px;height:64px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;font-size:1.8rem;
+    transition:.4s;
+  }
+  .contact-card:hover .icon{transform:scale(1.15) rotate(-8deg);}
+  .contact-card h3{font-size:1rem;margin-bottom:6px;font-weight:700;}
+  .contact-card p{color:var(--muted);font-size:.82rem;word-break:break-all;}
+  .ig .icon{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);box-shadow:0 8px 25px rgba(220,39,67,.4);}
+  .tt .icon{background:linear-gradient(135deg,#25f4ee,#000,#fe2c55);box-shadow:0 8px 25px rgba(37,244,238,.4);}
+  .wa .icon{background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 8px 25px rgba(37,211,102,.4);}
+  .gm .icon{background:linear-gradient(135deg,#ea4335,#fbbc05);box-shadow:0 8px 25px rgba(234,67,53,.4);}
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;padding:45px 8%;
+    border-top:1px solid var(--border);
+    color:var(--muted);font-size:.85rem;
+    background:rgba(5,7,13,.8);
+  }
+  footer b{
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  /* ===== MODAL ===== */
+  .modal{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);
+    z-index:300;align-items:center;justify-content:center;padding:20px;
+    backdrop-filter:blur(10px);
+  }
+  .modal.active{display:flex;animation:fadeIn .3s;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  .modal img{max-width:95%;max-height:90vh;border-radius:12px;box-shadow:0 0 60px rgba(0,229,255,.4);}
+  .modal .close{
+    position:absolute;top:25px;right:35px;font-size:2.5rem;
+    color:#fff;cursor:pointer;line-height:1;transition:.3s;
+  }
+  .modal .close:hover{color:var(--accent);transform:rotate(90deg);}
+
+  /* ===== PRINT CV STYLE ===== */
+  #printCV{display:none;}
+  @media print{
+    @page{size:A4;margin:12mm;}
+    body{background:#fff !important;color:#111 !important;}
+    body>*{display:none !important;}
+    #printCV{display:block !important;font-family:'Poppins',sans-serif;color:#111;padding:0;}
+    #printCV *{color:#111 !important;}
+    #printCV .cv-header{border-bottom:3px solid #00bcd4;padding-bottom:14px;margin-bottom:18px;}
+    #printCV h1{font-size:22pt;margin:0 0 4px 0;letter-spacing:-.5px;}
+    #printCV .subtitle{font-size:10.5pt;color:#555 !important;font-weight:500;}
+    #printCV .contact-line{font-size:9.5pt;color:#333 !important;margin-top:8px;line-height:1.6;}
+    #printCV h2{font-size:12pt;color:#00bcd4 !important;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #ddd;padding-bottom:4px;margin:16px 0 8px;}
+    #printCV p, #printCV li{font-size:10pt;line-height:1.55;}
+    #printCV ul{padding-left:18px;}
+    #printCV li{margin-bottom:4px;}
+    #printCV .cv-row{display:flex;justify-content:space-between;gap:12px;font-size:10pt;margin-bottom:2px;}
+    #printCV .cv-row b{font-size:10.5pt;}
+    #printCV .cv-row span{color:#666 !important;font-family:monospace;font-size:9pt;}
+    #printCV .cv-section{margin-bottom:12px;}
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:900px){
+    .hero-text h1{font-size:2.2rem;}
+    .avatar-wrap{width:220px;height:220px;}
+    .avatar{width:200px;height:200px;font-size:5rem;}
+    nav ul{
+      position:absolute;top:70px;left:0;width:100%;
+      flex-direction:column;background:rgba(5,7,13,.98);
+      padding:20px 8%;gap:18px;display:none;
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(20px);
+    }
+    nav ul.open{display:flex;}
+    .menu-btn{display:block;}
+    .cursor-glow{display:none;}
+    .section-title h2{font-size:2rem;}
+    section{padding:80px 6%;}
+    .about-text{padding:28px;}
+    .cv-wrap{padding:36px 24px;}
+  }
+  @media(max-width:500px){
+    .hero-text h1{font-size:1.7rem;letter-spacing:-.5px;}
+    .section-title h2{font-size:1.6rem;}
+    .hero-btns{flex-direction:column;align-items:stretch;}
+    .hero-btns .btn{justify-content:center;}
+    .cv-btns{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== PARTICLES + EFFECTS ===== -->
+<canvas id="particles"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- ============ NAVBAR ============ -->
+<nav>
+  <div class="logo">Riyad.dev</div>
+  <div class="menu-btn" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</div>
+  <ul id="navMenu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#skills">Skill</a></li>
+    <li><a href="#certificates">Sertifikat</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-wrap">
+    <div class="hero-text">
+      <span class="badge"><span class="dot"></span> Pelajar SMKN 3 Kendari</span>
+      <h1>Halo, saya <span>Muh Riyad Azzikra Dz</span></h1>
+      <div class="typing" id="typing"></div>
+      <p>
+        Seorang pelajar dari SMKN 3 Kendari yang punya minat besar di dunia
+        teknologi, desain, dan pengembangan web. Selalu semangat belajar hal
+        baru dan membangun karya yang bermanfaat.
+      </p>
+      <div class="hero-btns">
+        <a href="#certificates" class="btn btn-primary">🏆 Lihat Sertifikat</a>
+        <a href="#cv" class="btn btn-cv">⬇️ Download CV</a>
+        <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <div class="avatar">
+        <img src="riyad.png" alt="Muh Riyad Azzikra Dz">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="section-title">
+    <div class="tag">// 01. Tentang</div>
+    <h2>Tentang <span>Saya</span></h2>
+    <div class="line"></div>
+  </div>
+  <div class="about-wrap">
+    <div class="about-text">
+      <p>
+        Nama lengkap saya <b>Muh Riyad Azzikra Dz</b>, biasa dipanggil Riyad.
+        Saya siswa aktif di <b>SMKN 3 Kendari</b>. Saya percaya belajar tidak
+        hanya di dalam kelas, tapi juga lewat proyek nyata, lomba, dan sertifikasi.
+      </p>
+      <p>
+        Saya suka mengeksplorasi hal baru di bidang teknologi — mulai dari membuat
+        website sederhana, desain grafis, sampai mengikuti berbagai pelatihan online.
+        Saya juga senang bekerja dalam tim dan berbagi ilmu dengan teman-teman.
+      </p>
+      <div class="about-info">
+        <div class="info-chip">📍 <b>Kendari</b>, Sulawesi Tenggara</div>
+        <div class="info-chip">🏫 <b>SMKN 3 Kendari</b></div>
+        <div class="info-chip">💻 <b>Web & Design</b> Enthusiast</div>
+        <div class="info-chip">🚀 <b>Fast Learner</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="section-title">
+    <div class="tag">// 02. Keahlian</div>
+    <h2>Keahlian <span>Saya</span></h2>
+    <div class="line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="icon">🌐</div>
+      <h3>HTML & CSS</h3>
+      <p>Membuat tampilan website rapi, responsif, dan modern.</p>
+      <div class="skill-bar"><span data-width="90%"></span></div>
+    </div>
+    <div class="skill-card">
+      <div class="icon">⚡</div>
+      <h3>JavaScript</h3>
+      <p>Menambahkan interaksi dan logika pada website.</p>
+      <div class="skill-bar"><span data-width="75%"></span></div>
+    </div>
+    <div class="skill-card">
+      <div class="icon">🎨</div>
+      <h3>Desain Grafis</h3>
+      <p>Membuat poster, banner, dan konten visual.</p>
+      <div class="skill-bar"><span data-width="85%"></span></div>
+    </div>
+    <div class="skill-card">
+      <div class="icon">🛠️</div>
+      <h3>Problem Solving</h3>
+      <p>Mencari solusi teknis dan belajar mandiri.</p>
+      <div class="skill-bar"><span data-width="80%"></span></div>
+    </div>
+    <div class="skill-card">
+      <div class="icon">🤝</div>
+      <h3>Kerja Tim</h3>
+      <p>Berpengalaman dalam proyek sekolah & lomba.</p>
+      <div class="skill-bar"><span data-width="88%"></span></div>
+    </div>
+    <div class="skill-card">
+      <div class="icon">📱</div>
+      <h3>Media Sosial</h3>
+      <p>Mengelola konten dan branding digital.</p>
+      <div class="skill-bar"><span data-width="82%"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICATES ============ -->
+<section id="certificates">
+  <div class="section-title">
+    <div class="tag">// 03. Pencapaian</div>
+    <h2>Sertifikat <span>Saya</span></h2>
+    <div class="line"></div>
+    <p style="color:var(--muted);margin-top:16px;font-size:.9rem;">
+      Klik kartu untuk melihat gambar sertifikat secara penuh.
+    </p>
+  </div>
+  <div class="cert-grid">
+    <!-- GANTI gambar & teks sesuai sertifikatmu -->
+    <div class="cert-card" onclick="openModal('sertifikat1.jpg')">
+      <div class="cert-img">📜</div>
+      <div class="cert-body">
+        <h3>GANTI NAMA SERTIFIKAT 1</h3>
+        <div class="issuer">🎖️ GANTI PENERBIT</div>
+        <div class="year">📅 2025</div>
+      </div>
+    </div>
+    <div class="cert-card" onclick="openModal('sertifikat2.jpg')">
+      <div class="cert-img">🏅</div>
+      <div class="cert-body">
+        <h3>GANTI NAMA SERTIFIKAT 2</h3>
+        <div class="issuer">🎖️ GANTI PENERBIT</div>
+        <div class="year">📅 2025</div>
+      </div>
+    </div>
+    <div class="cert-card" onclick="openModal('sertifikat3.jpg')">
+      <div class="cert-img">🎖️</div>
+      <div class="cert-body">
+        <h3>GANTI NAMA SERTIFIKAT 3</h3>
+        <div class="issuer">🎖️ GANTI PENERBIT</div>
+        <div class="year">📅 2024</div>
+      </div>
+    </div>
+    <div class="cert-card" onclick="openModal('sertifikat4.jpg')">
+      <div class="cert-img">🏆</div>
+      <div class="cert-body">
+        <h3>GANTI NAMA SERTIFIKAT 4</h3>
+        <div class="issuer">🎖️ GANTI PENERBIT</div>
+        <div class="year">📅 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CV DOWNLOAD ============ -->
+<section id="cv">
+  <div class="section-title">
+    <div class="tag">// 04. Curriculum Vitae</div>
+    <h2>Download <span>CV Saya</span></h2>
+    <div class="line"></div>
+  </div>
+  <div class="cv-wrap">
+    <h3>📄 Curriculum Vitae — Muh Riyad Azzikra Dz</h3>
+    <p>
+      Dapatkan CV saya dalam format PDF. Ada 2 cara: download file PDF yang sudah
+      disiapkan, atau cetak langsung (Save as PDF) dari halaman ini.
+    </p>
+    <div class="cv-btns">
+      <a href="cv-riyad.pdf" download class="btn btn-primary">⬇️ Download CV (PDF)</a>
+      <button onclick="window.print()" class="btn btn-cv">🖨️ Cetak / Save as PDF</button>
+    </div>
+    <div class="cv-note">
+      💡 Tips: Untuk cara 1, taruh file <b>cv-riyad.pdf</b> di folder yang sama dengan file HTML ini.
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="section-title">
+    <div class="tag">// 05. Kontak</div>
+    <h2>Hubungi <span>Saya</span></h2>
+    <div class="line"></div>
+    <p style="color:var(--muted);margin-top:16px;font-size:.9rem;">
+      Semua tombol di bawah langsung berfungsi — klik saja!
+    </p>
+  </div>
+  <div class="contact-grid">
+
+    <!-- WhatsApp: 6287860550780 -->
+    <a class="contact-card wa" href="https://wa.me/6287860550780?text=Halo%20Riyad%2C%20saya%20mau%20menghubungi%20kamu" target="_blank" rel="noopener">
+      <div class="icon">💬</div>
+      <h3>WhatsApp</h3>
+      <p>+62 878-6055-0780</p>
+    </a>
+
+    <!-- Instagram: 05_azzikra -->
+    <a class="contact-card ig" href="https://instagram.com/05_azzikra" target="_blank" rel="noopener">
+      <div class="icon">📸</div>
+      <h3>Instagram</h3>
+      <p>@05_azzikra</p>
+    </a>
+
+    <!-- TikTok: azzikra2205 -->
+    <a class="contact-card tt" href="https://tiktok.com/@azzikra2205" target="_blank" rel="noopener">
+      <div class="icon">🎵</div>
+      <h3>TikTok</h3>
+      <p>@azzikra2205</p>
+    </a>
+
+    <!-- Gmail: azzikrazull@gmail.com -->
+    <a class="contact-card gm" href="mailto:azzikrazull@gmail.com?subject=Halo%20Riyad&body=Halo%20Riyad%2C%20saya%20mau%20menghubungi%20kamu.">
+      <div class="icon">✉️</div>
+      <h3>Gmail</h3>
+      <p>azzikrazull@gmail.com</p>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <p>© 2025 <b>Muh Riyad Azzikra Dz</b> — Pelajar SMKN 3 Kendari. Dibuat dengan ❤️</p>
+</footer>
+
+<!-- ============ MODAL SERTIFIKAT ============ -->
+<div class="modal" id="certModal" onclick="closeModal(event)">
+  <span class="close" onclick="closeModal(event, true)">&times;</span>
+  <img id="modalImg" src="" alt="Sertifikat">
+</div>
+
+<!-- ============ HIDDEN PRINT CV LAYOUT ============ -->
+<div id="printCV">
+  <div class="cv-header">
+    <h1>MUH RIYAD AZZIKRA DZ</h1>
+    <div class="subtitle">Pelajar SMKN 3 Kendari · Web & Design Enthusiast</div>
+    <div class="contact-line">
+      📍 Kendari, Sulawesi Tenggara &nbsp;·&nbsp;
+      📱 +62 878-6055-0780 &nbsp;·&nbsp;
+      ✉️ azzikrazull@gmail.com<br>
+      📸 @05_azzikra &nbsp;·&nbsp;
+      🎵 @azzikra2205
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <h2>Profil Singkat</h2>
+    <p>Pelajar aktif SMKN 3 Kendari dengan minat besar di bidang teknologi, desain
+    grafis, dan pengembangan web. Terbiasa bekerja dalam tim, cepat belajar hal baru,
+    dan senang mengerjakan proyek nyata di luar kelas.</p>
+  </div>
+
+  <div class="cv-section">
+    <h2>Pendidikan</h2>
+    <div class="cv-row"><b>SMKN 3 Kendari</b><span>2023 — Sekarang</span></div>
+    <p style="font-size:9.5pt;color:#555 !important;">Jurusan: GANTI_JURUSAN_KAMU</p>
+  </div>
+
+  <div class="cv-section">
+    <h2>Keahlian</h2>
+    <ul>
+      <li>HTML & CSS — membuat tampilan website responsif & modern</li>
+      <li>JavaScript dasar — interaksi dan logika website</li>
+      <li>Desain Grafis — poster, banner, konten media sosial</li>
+      <li>Problem Solving & Kerja Tim</li>
+      <li>Manajemen Media Sosial</li>
+    </ul>
+  </div>
+
+  <div class="cv-section">
+    <h2>Sertifikat & Pencapaian</h2>
+    <ul>
+      <li><b>GANTI NAMA SERTIFIKAT 1</b> — GANTI PENERBIT (2025)</li>
+      <li><b>GANTI NAMA SERTIFIKAT 2</b> — GANTI PENERBIT (2025)</li>
+      <li><b>GANTI NAMA SERTIFIKAT 3</b> — GANTI PENERBIT (2024)</li>
+      <li><b>GANTI NAMA SERTIFIKAT 4</b> — GANTI PENERBIT (2024)</li>
+    </ul>
+  </div>
+
+  <div class="cv-section">
+    <h2>Kontak</h2>
+    <p>WhatsApp: +62 878-6055-0780 &nbsp;·&nbsp; Email: azzikrazull@gmail.com</p>
+  </div>
+</div>
+
+<script>
+  /* ===== TYPING EFFECT ===== */
+  const texts = [
+    'Web Developer Pemula 🚀',
+    'Design Enthusiast 🎨',
+    'Fast Learner ⚡',
+    'Pelajar SMKN 3 Kendari 🎓'
+  ];
+  let ti = 0, ci = 0, deleting = false;
+  const typingEl = document.getElementById('typing');
+  function type(){
+    const cur = texts[ti];
+    if(!deleting){
+      typingEl.textContent = cur.substring(0, ci++);
+      if(ci > cur.length){ deleting = true; setTimeout(type, 1400); return; }
+    } else {
+      typingEl.textContent = cur.substring(0, ci--);
+      if(ci === 0){ deleting = false; ti = (ti+1) % texts.length; }
+    }
+    setTimeout(type, deleting ? 45 : 90);
+  }
+  type();
+
+  /* ===== SCROLL PROGRESS ===== */
+  const scrollBar = document.getElementById('scrollBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const p = (window.scrollY / h) * 100;
+    scrollBar.style.width = p + '%';
+  });
+
+  /* ===== CURSOR GLOW ===== */
+  const glow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+
+  /* ===== PARTICLE BACKGROUND ===== */
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class Particle {
+    constructor(){
+      this.reset();
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+    }
+    reset(){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.r = Math.random() * 1.8 + 0.4;
+      this.alpha = Math.random() * 0.5 + 0.2;
+    }
+    update(){
+      this.x += this.vx; this.y += this.vy;
+      if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    draw(){
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,229,255,${this.alpha})`;
+      ctx.fill();
+    }
+  }
+  for(let i=0;i<90;i++) particles.push(new Particle());
+
+  function connectLines(){
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 120){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0,229,255,${0.15 * (1 - dist/120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connectLines();
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  /* ===== MODAL SERTIFIKAT ===== */
+  function openModal(src){
+    const modal = document.getElementById('certModal');
+    const img = document.getElementById('modalImg');
+    img.src = src;
+    modal.classList.add('active');
+    img.onerror = () => { img.style.display = 'none'; };
+    img.onload = () => { img.style.display = 'block'; };
+  }
+  function closeModal(e, force){
+    if(force || e.target.id === 'certModal'){
+      document.getElementById('certModal').classList.remove('active');
+    }
+  }
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') document.getElementById('certModal').classList.remove('active');
+  });
+
+  /* ===== MENU MOBILE ===== */
+  document.querySelectorAll('#navMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navMenu').classList.remove('open');
+    });
+  });
+
+  /* ===== SCROLL REVEAL + SKILL BARS ===== */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+        const bars = entry.target.querySelectorAll ? entry.target.querySelectorAll('.skill-bar span') : [];
+        bars.forEach(b => { b.style.width = b.dataset.width; });
+        if(entry.target.classList.contains('skill-card')){
+          const b = entry.target.querySelector('.skill-bar span');
+          if(b) b.style.width = b.dataset.width;
+        }
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.skill-card, .cert-card, .contact-card, .about-text, .cv-wrap').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(40px)';
+    el.style.transition = 'opacity .8s ease, transform .8s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
